@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.4.451.19169",
+      "templateHash": "12884206267258072044"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    }
+  },
+  "functions": [],
+  "variables": {
+    "iotHubName": "[format('iothub-{0}', uniqueString(resourceGroup().id))]",
+    "managedGroupId": "[format('{0}-resources-{1}', resourceGroup().id, uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Solutions/applications",
+      "apiVersion": "2019-07-01",
+      "name": "ux4iot",
+      "kind": "servicecatalog",
+      "location": "[parameters('location')]",
+      "properties": {
+        "applicationDefinitionId": "/subscriptions/240b5b7d-bd7c-43a8-b3e5-e71b7fcaaf45/resourceGroups/subioto-shared/providers/Microsoft.Solutions/applicationDefinitions/Subioto",
+        "managedResourceGroupId": "[variables('managedGroupId')]",
+        "parameters": {
+          "iotHubEventHubConnectionString": {
+            "value": "[format('Endpoint={0};SharedAccessKeyName=iothubowner;SharedAccessKey={1};EntityPath={2}', reference(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))).eventHubEndpoints.events.endpoint, listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), '2021-03-31').value[0].primaryKey, reference(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))).eventHubEndpoints.events.path)]"
+          },
+          "iotHubServiceConnectionString": {
+            "value": "[format('HostName={0};SharedAccessKeyName=iothubowner;SharedAccessKey={1}', reference(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))).hostName, listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), '2021-03-31').value[0].primaryKey)]"
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Devices/IotHubs",
+      "apiVersion": "2021-03-31",
+      "name": "[variables('iotHubName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "capacity": 1,
+        "name": "S1"
+      },
+      "properties": {
+        "routing": {
+          "routes": [
+            {
+              "name": "ux4iot-twin-changes",
+              "isEnabled": true,
+              "source": "TwinChangeEvents",
+              "condition": "true",
+              "endpointNames": [
+                "events"
+              ]
+            },
+            {
+              "name": "ux4iot-connection-events",
+              "isEnabled": true,
+              "source": "DeviceConnectionStateEvents",
+              "condition": "true",
+              "endpointNames": [
+                "events"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
