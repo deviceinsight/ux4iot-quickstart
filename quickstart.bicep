@@ -1,5 +1,3 @@
-param location string = resourceGroup().location
-
 var iotHubName = 'iothub-${uniqueString(resourceGroup().id)}'
 var iotHubServiceConnectionString = 'HostName=${iotHub.properties.hostName};SharedAccessKeyName=iothubowner;SharedAccessKey=${listKeys(iotHub.id, iotHub.apiVersion).value[0].primaryKey}'
 var iotHubEventHubConnectionString = 'Endpoint=${iotHub.properties.eventHubEndpoints.events.endpoint};SharedAccessKeyName=iothubowner;SharedAccessKey=${listKeys(iotHub.id, iotHub.apiVersion).value[0].primaryKey};EntityPath=${iotHub.properties.eventHubEndpoints.events.path}'
@@ -8,7 +6,7 @@ var managedGroupId = '${resourceGroup().id}-resources-${uniqueString(resourceGro
 resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   name: 'ux4iot'
   kind: 'servicecatalog'
-  location: location
+  location: resourceGroup().location
   properties: {
     applicationDefinitionId: '/subscriptions/240b5b7d-bd7c-43a8-b3e5-e71b7fcaaf45/resourceGroups/subioto-shared/providers/Microsoft.Solutions/applicationDefinitions/Subioto'
     managedResourceGroupId: managedGroupId
@@ -25,7 +23,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
 
 resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = { 
   name: iotHubName
-  location: location
+  location: resourceGroup().location
   sku: {
     capacity: 1
     name: 'S1'
