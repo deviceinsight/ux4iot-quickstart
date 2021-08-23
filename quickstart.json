@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.4.451.19169",
-      "templateHash": "10869006497306923767"
+      "version": "0.4.613.9944",
+      "templateHash": "12241072465213557455"
     }
   },
   "functions": [],
@@ -21,7 +21,7 @@
       "kind": "servicecatalog",
       "location": "[resourceGroup().location]",
       "properties": {
-        "applicationDefinitionId": "/subscriptions/240b5b7d-bd7c-43a8-b3e5-e71b7fcaaf45/resourceGroups/subioto-shared/providers/Microsoft.Solutions/applicationDefinitions/Subioto",
+        "applicationDefinitionId": "/subscriptions/240b5b7d-bd7c-43a8-b3e5-e71b7fcaaf45/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot",
         "managedResourceGroupId": "[variables('managedGroupId')]",
         "parameters": {
           "iotHubEventHubConnectionString": {
