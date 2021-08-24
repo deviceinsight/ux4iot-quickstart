@@ -21,7 +21,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   }
 }
 
-resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = { 
+resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = {
   name: iotHubName
   location: resourceGroup().location
   sku: {
@@ -30,6 +30,15 @@ resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = {
   }
   properties: {
     routing: {
+      fallbackRoute: {
+        name: '$fallback'
+        source: 'DeviceMessages'
+        condition: 'true'
+        endpointNames: [
+          'events'
+        ]
+        isEnabled: true
+      }
       routes: [
         {
           name: 'ux4iot-twin-changes'
@@ -38,7 +47,7 @@ resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = {
           condition: 'true'
           endpointNames: [
             'events'
-         ]
+          ]
         }
         {
           name: 'ux4iot-connection-events'
@@ -47,7 +56,7 @@ resource iotHub 'Microsoft.Devices/IotHubs@2021-03-31' = {
           condition: 'true'
           endpointNames: [
             'events'
-         ]
+          ]
         }
       ]
     }
