@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "12241072465213557455"
+      "templateHash": "13800198607161542406"
     }
   },
   "functions": [],
@@ -47,6 +47,15 @@
       },
       "properties": {
         "routing": {
+          "fallbackRoute": {
+            "name": "$fallback",
+            "source": "DeviceMessages",
+            "condition": "true",
+            "endpointNames": [
+              "events"
+            ],
+            "isEnabled": true
+          },
           "routes": [
             {
               "name": "ux4iot-twin-changes",
