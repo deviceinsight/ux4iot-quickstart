@@ -8,7 +8,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   kind: 'servicecatalog'
   location: resourceGroup().location
   properties: {
-    applicationDefinitionId: '/subscriptions/240b5b7d-bd7c-43a8-b3e5-e71b7fcaaf45/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot'
+    applicationDefinitionId: '/subscriptions/ab92703c-7fdb-4a1e-8ea8-b402f4e2ea25/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot'
     managedResourceGroupId: managedGroupId
     parameters: {
       iotHubEventHubConnectionString: {
