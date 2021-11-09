@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "12038612203171535794"
+      "templateHash": "15630085985595308692"
     }
   },
   "functions": [],
@@ -27,7 +27,6 @@
         "version": "1.0.1"
       },
       "properties": {
-        "applicationDefinitionId": "/subscriptions/ab92703c-7fdb-4a1e-8ea8-b402f4e2ea25/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot",
         "managedResourceGroupId": "[variables('managedGroupId')]",
         "parameters": {
           "iotHubEventHubConnectionString": {

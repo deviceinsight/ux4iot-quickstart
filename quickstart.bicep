@@ -14,7 +14,6 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
     version: '1.0.1'
   }
   properties: {
-    applicationDefinitionId: '/subscriptions/ab92703c-7fdb-4a1e-8ea8-b402f4e2ea25/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot'
     managedResourceGroupId: managedGroupId
     parameters: {
       iotHubEventHubConnectionString: {
