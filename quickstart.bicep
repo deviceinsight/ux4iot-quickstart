@@ -11,7 +11,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   name: 'ux4iot'
   kind: kind
   location: resourceGroup().location
-  plan:serviceCatalog ? null : {
+  plan: serviceCatalog ? null : {
     name: 'standard'
     product: 'ux4iot'
     publisher: 'deviceinsightgmbh-4961725'
