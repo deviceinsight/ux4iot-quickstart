@@ -1,13 +1,17 @@
+param serviceCatalog bool = false
+
 var iotHubName = 'iothub-${uniqueString(resourceGroup().id)}'
 var iotHubServiceConnectionString = 'HostName=${iotHub.properties.hostName};SharedAccessKeyName=iothubowner;SharedAccessKey=${listKeys(iotHub.id, iotHub.apiVersion).value[0].primaryKey}'
 var iotHubEventHubConnectionString = 'Endpoint=${iotHub.properties.eventHubEndpoints.events.endpoint};SharedAccessKeyName=iothubowner;SharedAccessKey=${listKeys(iotHub.id, iotHub.apiVersion).value[0].primaryKey};EntityPath=${iotHub.properties.eventHubEndpoints.events.path}'
 var managedGroupId = '${resourceGroup().id}-resources-${uniqueString(resourceGroup().id)}'
 
+var kind = serviceCatalog ? 'servicecatalog' : 'marketplace'
+
 resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   name: 'ux4iot'
-  kind: 'marketplace'
+  kind: kind
   location: resourceGroup().location
-  plan: {
+  plan:serviceCatalog ? null : {
     name: 'standard'
     product: 'ux4iot'
     publisher: 'deviceinsightgmbh-4961725'
@@ -15,6 +19,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
   }
   properties: {
     managedResourceGroupId: managedGroupId
+    applicationDefinitionId: serviceCatalog ? '/subscriptions/ab92703c-7fdb-4a1e-8ea8-b402f4e2ea25/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot' : null
     parameters: {
       iotHubEventHubConnectionString: {
         value: iotHubEventHubConnectionString
