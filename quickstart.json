@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1124.51302",
-      "templateHash": "8057277005129497368"
+      "templateHash": "5240326033762015678"
     }
   },
   "parameters": {
@@ -26,7 +26,7 @@
       "name": "ux4iot",
       "kind": "[variables('kind')]",
       "location": "[resourceGroup().location]",
-      "plan": "[if(parameters('serviceCatalog'), null(), createObject('name', 'standard', 'product', 'ux4iot', 'publisher', 'deviceinsightgmbh-4961725', 'version', '1.0.1'))]",
+      "plan": "[if(parameters('serviceCatalog'), null(), createObject('name', 'standard', 'product', 'ux4iot', 'publisher', 'deviceinsightgmbh-4961725', 'version', '1.2.1'))]",
       "properties": {
         "managedResourceGroupId": "[variables('managedGroupId')]",
         "applicationDefinitionId": "[if(parameters('serviceCatalog'), '/subscriptions/ab92703c-7fdb-4a1e-8ea8-b402f4e2ea25/resourceGroups/ux4iot-shared/providers/Microsoft.Solutions/applicationDefinitions/ux4iot', null())]",
