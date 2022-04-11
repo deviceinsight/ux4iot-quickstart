@@ -15,7 +15,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
     name: 'standard'
     product: 'ux4iot'
     publisher: 'deviceinsightgmbh-4961725'
-    version: '1.4.0'
+    version: '1.5.0'
   }
   properties: {
     managedResourceGroupId: managedGroupId
