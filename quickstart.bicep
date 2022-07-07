@@ -7,7 +7,7 @@ var managedGroupId = '${resourceGroup().id}-resources-${uniqueString(resourceGro
 
 var kind = serviceCatalog ? 'servicecatalog' : 'marketplace'
 
-resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
+resource managedApp 'Microsoft.Solutions/applications@2021-07-01' = {
   name: 'ux4iot'
   kind: kind
   location: resourceGroup().location
@@ -15,7 +15,7 @@ resource managedApp 'Microsoft.Solutions/applications@2019-07-01' = {
     name: 'standard'
     product: 'ux4iot'
     publisher: 'deviceinsightgmbh-4961725'
-    version: '1.5.0'
+    version: '2.0.0'
   }
   properties: {
     managedResourceGroupId: managedGroupId
